@@ -36,9 +36,26 @@ async function main() {
 
   const result = await academic.setAlunoContractAddress(alunoContract.address);
   await result.wait(1);
+
+  const AcademicToken = await hre.ethers.getContractFactory("AcademicToken");
+  const academicToken = await AcademicToken.deploy();
+  await academicToken.deployed();
+  console.log(
+    `Academic token deployed to ${academicToken.address}!`
+  );
+
+  const AcademicCertificate = await hre.ethers.getContractFactory("AcademicCertificate");
+  const academicCertificate = await AcademicCertificate.deploy();
+  await academicCertificate.deployed();
+  console.log(
+    `Academic certificate contract deployed to ${academicCertificate.address}!`
+  );
+
   console.log(
     `Deploy finished with success!`
   );
+
+  
 
 
 }
